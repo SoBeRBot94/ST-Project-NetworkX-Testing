@@ -19,6 +19,12 @@ class NodesTest(unittest.TestCase):
         result = [1,2,3,4,5,6,7]
         self.assertListEqual(nodeList, result)
 
+    def test_number_of_nodes_non_empty(self):
+        '''Should return the number of nodes in the initialized graph - NonEmpty'''
+        graph = nx.Graph([(1,2),(1,4),(1,5),(2,3),(3,4),(3,5),(5,6),(6,7)])
+        nodeLength = nx.number_of_nodes(graph)
+        result = 7
+        self.assertEqual(nodeLength, result)
 
 if __name__ == '__main__':
     unittest.main()
