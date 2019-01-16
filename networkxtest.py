@@ -20,6 +20,10 @@ class TestAttributes(unittest.TestCase):
 		output=nx.is_weighted(graph)
 		self.assertFalse(output)
 
+		graph.add_edges_from([(1, 2, {'weight' : 2}), (1, 3, {'weight' : 4}), (1, 4, {'weight' : 6})])
+		output=nx.is_weighted(graph)
+		self.assertTrue(output)
+
 
 if __name__ == '__main__':
     unittest.main()
