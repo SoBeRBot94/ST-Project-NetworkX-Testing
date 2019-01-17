@@ -12,7 +12,7 @@ import unittest
 import networkx as nx
 
 class TestAttributes(unittest.TestCase):
-	#Test Case No 1a
+	#Test Case No 1a: Is Weighted with no weight
 	def test_is_weighted(self):
 		graph=nx.Graph()
 		graph.add_nodes_from([1,2,3,4])
@@ -20,18 +20,18 @@ class TestAttributes(unittest.TestCase):
 		output=nx.is_weighted(graph)
 		self.assertFalse(output)
 
-	#Test Case No 1b
+	#Test Case No 1b: Is Weighted with positive weight
 		graph.add_edges_from([(1, 2, {'weight' : 2}), (1, 3, {'weight' : 4}), (1, 4, {'weight' : 6})])
 		output=nx.is_weighted(graph)
 		self.assertTrue(output)
 
-	#Test Case No 1c
+	#Test Case No 1c: Is Weighted with negative weight
 		graph.add_edges_from([(1, 2, {'weight' : -2}), (1, 3, {'weight' : -4}), (1, 4, {'weight' : -6})])
 		output=nx.is_weighted(graph)
 		self.assertTrue(output)
 
 
-	#Test Case No 2a
+	#Test Case No 2a: Is Negatively Weighted with no weight
 	def test_is_negatively_weighted(self):
 		graph=nx.Graph()
 		graph.add_nodes_from([5,6,7,8])
@@ -39,12 +39,12 @@ class TestAttributes(unittest.TestCase):
 		output=nx.is_negatively_weighted(graph)
 		self.assertFalse(output)
 
-	#Test Case No 2b
+	#Test Case No 2b: Is Negatively Weighted with negative weight
 		graph.add_edges_from([(5, 6, {'weight' : -1}), (6, 7, {'weight' : -2}), (7, 8, {'weight' : -3})])
 		output=nx.is_negatively_weighted(graph)
 		self.assertTrue(output)
 
-	#Test Case No 2c
+	#Test Case No 2c: Is Negatively Weighted with positive weight
 		graph.add_edges_from([(5, 6, {'weight' : 1}), (6, 7, {'weight' : 2}), (7, 8, {'weight' : 3})])
 		output=nx.is_negatively_weighted(graph)
 		self.assertFalse(output)
