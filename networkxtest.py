@@ -20,6 +20,7 @@ class NodesTest(unittest.TestCase):
         self.assertListEqual(nodeList, result)
 
     def test_character_nodes(self):
+        '''Should return the copy of the Graph's nodes in a list - Character'''
         graph = nx.Graph([('A','B'),('A','C'),('B','C'),('C','D'),('D','E')])
         nodeList = sorted(list(nx.nodes(graph)))
         result = ['A','B','C','D','E']
