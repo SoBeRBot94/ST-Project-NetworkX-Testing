@@ -22,6 +22,7 @@ class TestAttributes(unittest.TestCase):
 		output=nx.is_weighted(graph)
 		self.assertFalse(output)
 
+
 	def test_is_weighted_positive_weights(self):
 		'''Test Case No 1b: Is Weighted with positive weight'''
 		graph=nx.Graph()
@@ -29,6 +30,7 @@ class TestAttributes(unittest.TestCase):
 		graph.add_edges_from([(1, 2, {'weight' : 2}), (1, 3, {'weight' : 4}), (1, 4, {'weight' : 6})])
 		output=nx.is_weighted(graph)
 		self.assertTrue(output)
+
 
 	def test_is_weighted_negative_weights(self):
 		'''Test Case No 1c: Is Weighted with negative weight'''
@@ -47,6 +49,7 @@ class TestAttributes(unittest.TestCase):
 		output=nx.is_negatively_weighted(graph)
 		self.assertFalse(output)
 
+
 	def test_is_negatively_weighted_negative_weights(self):
 		'''Test Case No 2b: Is Negatively Weighted with negative weight'''
 		graph=nx.Graph()
@@ -55,6 +58,7 @@ class TestAttributes(unittest.TestCase):
 		output=nx.is_negatively_weighted(graph)
 		self.assertTrue(output)
 
+
 	def test_is_negatively_weighted_positive_weights(self):
 		'''Test Case No 2c: Is Negatively Weighted with positive weight'''
 		graph=nx.Graph()
@@ -62,6 +66,7 @@ class TestAttributes(unittest.TestCase):
 		graph.add_edges_from([(5, 6, {'weight' : 1}), (6, 7, {'weight' : 2}), (7, 8, {'weight' : 3})])
 		output=nx.is_negatively_weighted(graph)
 		self.assertFalse(output)
+
 
 	def test_set_node_attributes_true_value(self):
 		'''Test Case No 3a: Set Node Attributes with True Value'''
@@ -114,6 +119,15 @@ class TestAttributes(unittest.TestCase):
 		weight = nx.get_node_attributes(graph, 'weight')
 		output = weight[4]
 		self.assertTrue((output == 2))
+
+
+	def test_get_node_attributes_element(self):
+		'''Test Case No 4c: Get Attributes, get one element'''
+		graph = nx.Graph()
+		graph.add_node('agnes', year=1996, country='sweden', occ='student')
+		year = nx.get_node_attributes(graph, 'year')
+		output = year['agnes']
+		self.assertTrue((output == 1996))
 
 
 
