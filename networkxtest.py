@@ -88,13 +88,32 @@ class TestAttributes(unittest.TestCase):
 
 
 	def test_set_node_attributes_string(self):
-		'''Test Case No 3c: Set Node Attributes with strings'''
+		'''Test Case No 3c: Set Node Attributes with string'''
 		graph=nx.Graph()
 		graph.add_nodes_from([1,2,3,4])
 		graph.add_edges_from([(1,2),(1,3),(1,4)])
 
 		nx.set_node_attributes(graph, {1:'agnes'}, name='name')
 		self.assertTrue((graph.node[1]['name'] == 'agnes'))
+
+
+	def test_get_node_attributes_color(self):
+		'''Test Case No 4a: Get Attributes with color'''
+		graph=nx.Graph()
+		graph.add_nodes_from([1,2,3,4], color='blue')
+		color = nx.get_node_attributes(graph, 'color')
+		output = color[1]
+		result = 'blue'
+		self.assertEqual(output, result)
+		
+
+	def test_get_node_attributes_weight(self):
+		'''Test Case No 4b: Get Attributes with weight'''
+		graph=nx.Graph()
+		graph.add_nodes_from([1,2,3,4], weight=2)
+		weight = nx.get_node_attributes(graph, 'weight')
+		output = weight[4]
+		self.assertTrue((output == 2))
 
 
 
