@@ -54,5 +54,11 @@ class NodesTest(unittest.TestCase):
         result = 5
         self.assertEqual(nodeLength, result)
 
+    def test_number_of_nodes_empty(self):
+        '''Should return the number of nodes in the initialized graph - Empty'''
+        graph = nx.Graph()
+        nodeLength = nx.number_of_nodes(graph)
+        self.assertEqual(nodeLength, 0)
+
 if __name__ == '__main__':
     unittest.main()
