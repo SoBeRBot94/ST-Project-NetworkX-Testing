@@ -60,5 +60,23 @@ class NodesTest(unittest.TestCase):
         nodeLength = nx.number_of_nodes(graph)
         self.assertEqual(nodeLength, 0)
 
+    def test_connected_neighbors_non_empty(self):
+        '''Should return a list with all the connected neighboring nodes of a node N - NonEmpty'''
+        graph = nx.Graph([(1,2),(1,4),(1,5),(2,3),(3,4),(3,5),(5,6),(6,7)])
+        nodeNeighbors = list(nx.neighbors(graph, 1))
+        result = [2,4,5]
+        self.assertListEqual(nodeNeighbors, result)
+
+        graph = nx.Graph([(-1,-2),(-1,-4),(-1,-5),(-2,-3),(-3,-4),(-3,-5),(-5,-6),(-6,-7)])
+        nodeNeighbors = sorted(list(nx.neighbors(graph, -3)))
+        result = [-5,-4,-2]
+        self.assertListEqual(nodeNeighbors, result)
+
+        graph = nx.Graph([('A','B'),('A','C'),('B','C'),('C','D'),('D','E')])
+        nodeNeighbors = list(nx.neighbors(graph,'E'))
+        result = ['D']
+        self.assertListEqual(nodeNeighbors, result)
+
+
 if __name__ == '__main__':
     unittest.main()
