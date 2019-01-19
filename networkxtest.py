@@ -77,6 +77,15 @@ class NodesTest(unittest.TestCase):
         result = ['D']
         self.assertListEqual(nodeNeighbors, result)
 
+    def test_connected_neighbors_empty(self):
+        '''Should reutn a list with all the connected neighboring nodes of a node N - Empty'''
+        graph = nx.Graph()
+        flag = False
+        try:
+            nodeNeighbors = nx.neighbors(graph, 1)
+            flag = True
+        except nx.NetworkXError:
+            self.assertFalse(flag)
 
 if __name__ == '__main__':
     unittest.main()
