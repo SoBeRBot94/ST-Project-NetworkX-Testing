@@ -26,6 +26,12 @@ class NodesTest(unittest.TestCase):
         result = ['A','B','C','D','E']
         self.assertListEqual(nodeList, result)
     
+    def test_empty_nodes(self):
+        '''Should return the copy of the Graph's nodes in a list - Empty'''
+        graph = nx.Graph()
+        result = []
+        self.assertListEqual(result, list(nx.nodes(graph)))
+
     def test_number_of_nodes_non_empty(self):
         '''Should return the number of nodes in the initialized graph - NonEmpty'''
         graph = nx.Graph([(1,2),(1,4),(1,5),(2,3),(3,4),(3,5),(5,6),(6,7)])
