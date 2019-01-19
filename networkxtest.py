@@ -43,6 +43,16 @@ class NodesTest(unittest.TestCase):
         nodeLength = nx.number_of_nodes(graph)
         result = 7
         self.assertEqual(nodeLength, result)
+        
+        graph = nx.Graph([(-1,-2),(-1,-4),(-1,-5),(-2,-3),(-3,-4),(-3,-5),(-5,-6),(-6,-7)])
+        nodeLength = nx.number_of_nodes(graph)
+        result = 7
+        self.assertEqual(nodeLength, result)
+        
+        graph = nx.Graph([('A','B'),('A','C'),('B','C'),('C','D'),('D','E')])
+        nodeLength = nx.number_of_nodes(graph)
+        result = 5
+        self.assertEqual(nodeLength, result)
 
 if __name__ == '__main__':
     unittest.main()
