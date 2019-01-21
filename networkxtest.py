@@ -131,5 +131,15 @@ class NodesTest(unittest.TestCase):
         result = ['D','E']
         self.assertListEqual(nonNodeNeighbors, result)
 
+    def test_non_neigbors_empty(self):
+        '''Should return a list with all the non neighboring nodes of a node N - Empty'''
+        graph = nx.Graph()
+        flag = False
+        try:
+            nonNodeNeighbors = nx.non_neighbors(graph, 2)
+            flag = True
+        except nx.NetworkXError:
+            self.assertFalse(flag)
+
 if __name__ == '__main__':
     unittest.main()
