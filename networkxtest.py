@@ -87,5 +87,34 @@ class NodesTest(unittest.TestCase):
         except nx.NetworkXError:
             self.assertFalse(flag)
 
+    def test_all_neighbors_non_empty(self):
+        '''Should return a list with all the neighboring nodes of a node N - NonEmpty'''
+        graph = nx.Graph([(1,2),(1,4),(1,5),(2,3),(3,4),(3,5),(5,6),(6,7)])
+        allNodeNeighbors = list(nx.all_neighbors(graph, 5))
+        result = [1,3,6]
+        self.assertListEqual(allNodeNeighbors, result)
+
+        graph = nx.Graph([(-1,-2),(-1,-4),(-1,-5),(-2,-3),(-3,-4),(-3,-5),(-5,-6),(-6,-7)])
+        allNodeNeighbors = sorted(list(nx.all_neighbors(graph, -1)))
+        result = [-5,-4,-2]
+        self.assertListEqual(allNodeNeighbors, result)
+
+        graph = nx.Graph([('A','B'),('A','C'),('B','C'),('C','D'),('D','E')])
+        allNodeNeighbors = sorted(list(nx.all_neighbors(graph, 'B')))
+        result = ['A','C']
+        self.assertListEqual(allNodeNeighbors, result)
+
+    def test_all_neighbors_empty(self):
+        '''Should return a list with all the neighboring nodes of a node N - Empty'''
+        graph = nx.Graph()
+        flag = False
+        try:
+            allNodeNeighbors = nx.all_neighbors(graph, 2)
+            flag = True
+        except nx.NetworkXError:
+            self.assertFalse(flag)
+
+
+
 if __name__ == '__main__':
     unittest.main()
