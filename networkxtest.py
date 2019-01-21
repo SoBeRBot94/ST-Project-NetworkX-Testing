@@ -114,7 +114,22 @@ class NodesTest(unittest.TestCase):
         except nx.NetworkXError:
             self.assertFalse(flag)
 
+    def test_non_neighbors_non_empty(self):
+        '''Should return a list with all the non neighboring nodes of a node N - NonEmpty'''
+        graph = nx.Graph([(1,2),(1,4),(1,5),(2,3),(3,4),(3,5),(5,6),(6,7)])
+        nonNodeNeighbors = list(nx.non_neighbors(graph, 4))
+        result = [2,5,6,7]
+        self.assertListEqual(nonNodeNeighbors, result)
 
+        graph = nx.Graph([(-1,-2),(-1,-4),(-1,-5),(-2,-3),(-3,-4),(-3,-5),(-5,-6),(-6,-7)])
+        nonNodeNeighbors = sorted(list(nx.non_neighbors(graph, -1)))
+        result = [-7,-6,-3]
+        self.assertListEqual(nonNodeNeighbors, result)
+
+        graph = nx.Graph([('A','B'),('A','C'),('B','C'),('C','D'),('D','E')])
+        nonNodeNeighbors = sorted(list(nx.non_neighbors(graph, 'B')))
+        result = ['D','E']
+        self.assertListEqual(nonNodeNeighbors, result)
 
 if __name__ == '__main__':
     unittest.main()
