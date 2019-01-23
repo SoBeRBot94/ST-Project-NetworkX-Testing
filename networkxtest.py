@@ -130,6 +130,42 @@ class TestAttributes(unittest.TestCase):
 		self.assertTrue((output == 1996))
 
 
+	
+	def test_set_edge_attribute_string(self):
+		'''Test Case No 5a: Set Edge Attribute for string'''
+		graph = nx.path_graph(3)
+		nx.set_edge_attributes(graph, name='labels', values=['foo'])
+		output=graph[1][2]['labels']
+		self.assertEqual(output, ['foo'])
+
+		
+	def test_set_edge_attribute_betweenness(self):
+		'''Test Case No 5b: Set Edge Attribute for centrality'''
+		graph = nx.path_graph(3)
+		bb = nx.edge_betweenness_centrality(graph, normalized=False)
+		nx.set_edge_attributes(graph, name='betweenness', values=bb)
+		output=graph[1][2]['betweenness']
+		self.assertTrue((output == 2.0))
+
+
+	def test_get_edge_attribute_color(self):
+		'''Test Case No 6a: Get Edge Attribute for color'''
+		graph=nx.Graph()
+		nx.add_path(graph, [1, 2, 3], color='green')
+		color = nx.get_edge_attributes(graph, 'color')
+		output = color[(1,2)]
+		self.assertEqual(output, 'green')
+
+
+	def test_get_edge_attribute_int(self):
+		'''Test Case No 6b: Get Edge Attribute for integer'''
+		graph=nx.Graph()
+		nx.add_path(graph, [1, 2, 3], value=3)
+		value = nx.get_edge_attributes(graph, 'value')
+		output = value[(2,3)]
+		self.assertEqual(output, 3)
+
+
 
 
 
