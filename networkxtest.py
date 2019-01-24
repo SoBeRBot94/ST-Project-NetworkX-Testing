@@ -158,5 +158,15 @@ class NodesTest(unittest.TestCase):
         result = ['C']
         self.assertListEqual(commonNodeNeighbors, result)
 
+    def test_common_neigbors_empty(self):
+        '''Should return a list with all the neighboring nodes that are common between nodes N & M - Empty'''
+        graph = nx.Graph()
+        flag = False
+        try:
+            commonNodeNeighbors = nx.common_neighbors(graph, 2, 3)
+            flag = True
+        except nx.NetworkXError:
+            self.assertFalse(flag)
+
 if __name__ == '__main__':
     unittest.main()
