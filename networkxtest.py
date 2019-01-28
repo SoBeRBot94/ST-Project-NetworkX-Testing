@@ -284,6 +284,190 @@ class EdgesTest(unittest.TestCase):
         testgraph.add_edge(2,3)
         number_of_edges = nx.number_of_edges(testgraph)
         self.assertEqual(number_of_edges,len(testgraph)-1)
+class TestAttributes(unittest.TestCase):
+
+    
+    def test_is_weighted_without_weights(self):
+        '''Test Case No 1a: Is Weighted with no weight'''
+        graph=nx.Graph()
+        graph.add_nodes_from([1,2,3,4])
+        graph.add_edges_from([(1,2),(1,3),(1,4)])
+        output=nx.is_weighted(graph)
+        self.assertFalse(output)
+
+
+    def test_is_weighted_positive_weights(self):
+        '''Test Case No 1b: Is Weighted with positive weight'''
+        graph=nx.Graph()
+        graph.add_nodes_from([1,2,3,4])
+        graph.add_edges_from([(1, 2, {'weight' : 2}), (1, 3, {'weight' : 4}), (1, 4, {'weight' : 6})])
+        output=nx.is_weighted(graph)
+        self.assertTrue(output)
+
+
+    def test_is_weighted_negative_weights(self):
+        '''Test Case No 1c: Is Weighted with negative weight'''
+        graph=nx.Graph()
+        graph.add_nodes_from([1,2,3,4])
+        graph.add_edges_from([(1, 2, {'weight' : -2}), (1, 3, {'weight' : -4}), (1, 4, {'weight' : -6})])
+        output=nx.is_weighted(graph)
+        self.assertTrue(output)
+
+
+    def test_is_negatively_weighted_without_weights(self):
+        '''Test Case No 2a: Is Negatively Weighted with no weight'''
+        graph=nx.Graph()
+        graph.add_nodes_from([5,6,7,8])
+        graph.add_edges_from([(5,6),(6,7),(7,8)])
+        output=nx.is_negatively_weighted(graph)
+        self.assertFalse(output)
+
+
+    def test_is_negatively_weighted_negative_weights(self):
+        '''Test Case No 2b: Is Negatively Weighted with negative weight'''
+        graph=nx.Graph()
+        graph.add_nodes_from([5,6,7,8])
+        graph.add_edges_from([(5, 6, {'weight' : -1}), (6, 7, {'weight' : -2}), (7, 8, {'weight' : -3})])
+        output=nx.is_negatively_weighted(graph)
+        self.assertTrue(output)
+
+
+    def test_is_negatively_weighted_positive_weights(self):
+        '''Test Case No 2c: Is Negatively Weighted with positive weight'''
+        graph=nx.Graph()
+        graph.add_nodes_from([5,6,7,8])
+        graph.add_edges_from([(5, 6, {'weight' : 1}), (6, 7, {'weight' : 2}), (7, 8, {'weight' : 3})])
+        output=nx.is_negatively_weighted(graph)
+        self.assertFalse(output)
+
+
+    def test_set_node_attributes_true_value(self):
+        '''Test Case No 3a: Set Node Attributes with True Value'''
+        graph=nx.Graph()
+        graph.add_nodes_from([1,2,3,4])
+        graph.add_edges_from([(1,2),(1,3),(1,4)])
+
+        nx.set_node_attributes(graph, {1:2}, name='value')
+        output = graph.node[1]['value']
+        result = 2
+        self.assertEqual(output, result)
+
+
+    def test_set_node_attributes_false_value(self):
+        '''Test Case No 3b: Set Node Attributes with False Value'''
+        graph=nx.Graph()
+        graph.add_nodes_from([1,2,3,4])
+        graph.add_edges_from([(1,2),(1,3),(1,4)])
+
+        nx.set_node_attributes(graph, {1:2}, name='value')
+        output = graph.node[1]['value']
+        result = 4
+        self.assertNotEqual(output, result)
+
+
+    def test_set_node_attributes_string(self):
+        '''Test Case No 3c: Set Node Attributes with string'''
+        graph=nx.Graph()
+        graph.add_nodes_from([1,2,3,4])
+        graph.add_edges_from([(1,2),(1,3),(1,4)])
+
+        nx.set_node_attributes(graph, {1:'agnes'}, name='name')
+        self.assertTrue((graph.node[1]['name'] == 'agnes'))
+
+
+    def test_get_node_attributes_color(self):
+        '''Test Case No 4a: Get Attributes with color'''
+        graph=nx.Graph()
+        graph.add_nodes_from([1,2,3,4], color='blue')
+        color = nx.get_node_attributes(graph, 'color')
+        output = color[1]
+        result = 'blue'
+        self.assertEqual(output, result)
+        
+
+    def test_get_node_attributes_weight(self):
+        '''Test Case No 4b: Get Attributes with weight'''
+        graph=nx.Graph()
+        graph.add_nodes_from([1,2,3,4], weight=2)
+        weight = nx.get_node_attributes(graph, 'weight')
+        output = weight[4]
+        self.assertTrue((output == 2))
+
+
+    def test_get_node_attributes_element(self):
+        '''Test Case No 4c: Get Attributes, get one element'''
+        graph = nx.Graph()
+        graph.add_node('agnes', year=1996, country='sweden', occ='student')
+        year = nx.get_node_attributes(graph, 'year')
+        output = year['agnes']
+        self.assertTrue((output == 1996))
+
+
+    
+    def test_set_edge_attribute_string(self):
+        '''Test Case No 5a: Set Edge Attribute for string'''
+        graph = nx.path_graph(3)
+        nx.set_edge_attributes(graph, name='labels', values=['foo'])
+        output=graph[1][2]['labels']
+        self.assertEqual(output, ['foo'])
+
+        
+    def test_set_edge_attribute_betweenness(self):
+        '''Test Case No 5b: Set Edge Attribute for centrality'''
+        graph = nx.path_graph(3)
+        bb = nx.edge_betweenness_centrality(graph, normalized=False)
+        nx.set_edge_attributes(graph, name='betweenness', values=bb)
+        output=graph[1][2]['betweenness']
+        self.assertTrue((output == 2.0))
+
+
+    def test_get_edge_attribute_color(self):
+        '''Test Case No 6a: Get Edge Attribute for color'''
+        graph=nx.Graph()
+        nx.add_path(graph, [1, 2, 3], color='green')
+        color = nx.get_edge_attributes(graph, 'color')
+        output = color[(1,2)]
+        self.assertEqual(output, 'green')
+
+
+    def test_get_edge_attribute_int(self):
+        '''Test Case No 6b: Get Edge Attribute for integer'''
+        graph=nx.Graph()
+        nx.add_path(graph, [1, 2, 3], value=3)
+        value = nx.get_edge_attributes(graph, 'value')
+        output = value[(2,3)]
+        self.assertEqual(output, 3)
+class TestFreezingGraphStructure(unittest.TestCase):
+    def test_freeze(self):
+        graph = nx.Graph([(1,2), (1,3), (1,4)])
+        frozenGraph = nx.freeze(graph)
+        try:
+            frozenGraph.add_edges_from([(2,5),(3,6)])
+        except nx.NetworkXError:
+            print("The graph is frozen")
+        output = list(nx.edges(frozenGraph))
+        resList = [(1,2), (1,3), (1,4)]
+        self.assertListEqual(output, resList)
+
+        graph = nx.Graph([('a','b'), ('a','c'), ('a','d')])
+        frozenGraph = nx.freeze(graph)
+        try:
+            frozenGraph.add_edges_from([('e','f'), ('g','h')])
+        except nx.NetworkXError:
+           print ("The Graph is Frozen")
+        output = sorted(list(nx.edges(frozenGraph)))
+        resList = [('a','b'), ('a','c'), ('a','d')]
+        self.assertListEqual(output, resList)
+
+        graph = nx.Graph([('-1','-2'), ('-1','-3'), ('-1','-4')])
+        frozenGraph = nx.freeze(graph)
+        try:
+            frozenGraph.add_edges_from([('-2','-5'), ('-3','-6')])
+        except nx.NetworkXError:
+           print ("The Graph is Frozen")
+        output = sorted(list(nx.edges(frozenGraph)))
+        resList = [('-1','-2'), ('-1','-3'), ('-1','-4')]
+        self.assertEqual(set(output), set(resList))
 
 if __name__ == '__main__':
     unittest.main()
