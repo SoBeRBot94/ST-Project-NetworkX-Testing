@@ -41,7 +41,7 @@ class GraphTest(unittest.TestCase):
 		testgraph.remove_edge(1,5)
 		degree = nx.degree(testgraph, 5)
 		self.assertEqual(degree, 2)
-		#test whether degree of every node in a graph is at least one
+		testgraph = nx.Graph([(1,2)])
 		list_degree = []
 		list_nodes = nx.nodes(testgraph)
 		for el in list_nodes:
@@ -96,13 +96,6 @@ class GraphTest(unittest.TestCase):
 		copy_graph.add_edge(1,2)
 		degree = nx.degree(copy_graph, 1)
 		self.assertEqual(degree,1)
-
-
-
-
-
-
-
     	
 class EdgesTest(unittest.TestCase):
 	def test_edges(self):
@@ -134,19 +127,6 @@ class EdgesTest(unittest.TestCase):
 		testgraph.add_edge(2,3)
 		number_of_edges = nx.number_of_edges(testgraph)
 		self.assertEqual(number_of_edges,len(testgraph)-1)
-
-
-
-
-
-
-    
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
