@@ -38,7 +38,10 @@ class TestFreezingGraphStructure(unittest.TestCase):
         except nx.NetworkXError:
             output = sorted(list(nx.edges(frozenGraph)))
             resList = [('-1','-2'), ('-1','-3'), ('-4','-1')]
-            self.assertListEqual(output, resList)
+            i = 0
+            for el in output:
+                self.assertEqual(set(el), set(resList[i]))
+                i+=1
 
 class TestAttributes(unittest.TestCase):
 
