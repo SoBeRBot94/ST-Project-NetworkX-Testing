@@ -163,7 +163,7 @@ class NodesTest(unittest.TestCase):
         result = ['D','E']
         self.assertListEqual(nonNodeNeighbors, result)
 
-    def test_non_neigbors_empty(self):
+    def test_non_neighbors_empty(self):
         '''Should return a list with all the non neighboring nodes of a node N - Empty'''
         graph = nx.Graph()
         flag = False
@@ -190,7 +190,7 @@ class NodesTest(unittest.TestCase):
         result = ['C']
         self.assertListEqual(commonNodeNeighbors, result)
 
-    def test_common_neigbors_empty(self):
+    def test_common_neighbors_empty(self):
         '''Should return a list with all the neighboring nodes that are common between nodes N & M - Empty'''
         graph = nx.Graph()
         flag = False
