@@ -11,7 +11,6 @@ Student Names: Sudarsan Bhargavan, Valeria Helle, Agnes Lind, Anna Westergren
 import unittest
 import networkx as nx
 
-
 class RemoveEdges(unittest.TestCase):
 	def test_remove_edges_from_base_case(self):
 		'''adj = self.adj
@@ -45,7 +44,6 @@ class RemoveEdges(unittest.TestCase):
 		result = G.edges()
 		testgraph = nx.Graph()
 		self.assertEqual(testgraph.edges(), result)
-
 
   
 if __name__ == '__main__':
