@@ -35,7 +35,7 @@ class RemoveEdges(unittest.TestCase):
 		testgraph.remove_edges_from(nbunch)
 		result = nx.non_edges(testgraph)
 		for el in nbunch:
-			self.assertTrue(el in result)
+		    self.assertTrue(el in result)
 	def test_remove_all(self):
 		G = nx.Graph()
 		G.add_path([0,1,2,3])
