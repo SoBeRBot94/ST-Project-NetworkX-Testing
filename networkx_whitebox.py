@@ -11,6 +11,13 @@ Student Names: Sudarsan Bhargavan, Valeria Helle, Agnes Lind, Anna Westergren
 import unittest
 import networkx as nx
 
+class AddEdges(unittest.TestCase):
+    def test_add_edges_from_single_edge_with_key_new_vertex(self):
+        graph = nx.Graph([(1,2),(1,3),(2,4),(3,4),(4,5)])
+        graph.add_edges_from([(5,6)], key=3)
+        expOutput = list(nx.edges(graph))
+        result = [(1,2),(1,3),(2,4),(3,4),(4,5),(5,6)]
+        self.assertEqual(set(expOutput), set(result))
 
   
   
