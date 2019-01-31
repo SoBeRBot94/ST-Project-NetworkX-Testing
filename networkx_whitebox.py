@@ -68,7 +68,18 @@ class AddEdges(unittest.TestCase):
         result = [(1,2),(1,3),(2,4),(3,4),(4,5)]
         self.assertListEqual(expOutput, result)
   
-
+    def test_add_edges_from_multi_valued_tuple(self):
+        graph = nx.Graph([(1,2),(1,3),(2,4),(3,4),(4,5)])
+        flag = False
+        try:
+            graph.add_edges_from([(7,8,9,0)])
+            if len(nx.edges(graph)) > 5:
+                flag = True
+        except nx.NetworkXError:
+            expOutput = list(nx.edges(graph))
+            result = [(1,2),(1,3),(2,4),(3,4),(4,5)]
+            if set(expOutput) == set(result):
+                self.assertFalse(flag)
   
 if __name__ == '__main__':
     unittest.main()
