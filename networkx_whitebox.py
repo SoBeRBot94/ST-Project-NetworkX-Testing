@@ -10,17 +10,11 @@ Student Names: Sudarsan Bhargavan, Valeria Helle, Agnes Lind, Anna Westergren
   
 import unittest
 import networkx as nx
-from coverage import Coverage as cov
 
-cov.start()
 
   
   
   
-cov.stop()
-cov.save()
-
-cov.html_report()
 
   
 if __name__ == '__main__':
