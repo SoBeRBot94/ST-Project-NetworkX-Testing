@@ -9,6 +9,7 @@ Student Names: Sudarsan Bhargavan, Valeria Helle, Agnes Lind, Anna Westergren
 
 
 import unittest
+import math
 import networkx as nx
 
 
@@ -63,14 +64,14 @@ class GraphTest(unittest.TestCase):
 		edges = len(nx.edges(testgraph))
 		nodes = len(nx.nodes(testgraph))
 		density = (2 * edges)/(nodes* (nodes-1))
-		self.assertEqual(density, nx.density(testgraph))
+		self.assertEqual(density, math.floor(nx.density(testgraph)))
 		#test that density calculated by the function nx.density equals to 
 		#density calculated with the density formula for directed graph
 		testgraph_di = nx.DiGraph([(1,2),(1,5),(2,3),(2,5),(3,4),(4,5),(4,6)])
 		edges_di = len(nx.edges(testgraph_di))
 		nodes_di = len(nx.nodes(testgraph_di))
 		density_di = (edges_di)/(nodes_di* (nodes_di-1))
-		self.assertEqual(density_di, nx.density(testgraph_di))
+		self.assertEqual(density_di, math.floor(nx.density(testgraph_di)))
 		self.assertFalse(nx.density(testgraph_di) == nx.density(testgraph))
 		#test that density of an empty grpah equals to 0
 		testgraph = nx.Graph([])
