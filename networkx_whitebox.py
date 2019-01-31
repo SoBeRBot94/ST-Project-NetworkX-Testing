@@ -80,6 +80,13 @@ class AddEdges(unittest.TestCase):
             result = [(1,2),(1,3),(2,4),(3,4),(4,5)]
             if set(expOutput) == set(result):
                 self.assertFalse(flag)
-  
+
+    def test_add_edges_from_multiple_tuples(self):
+        graph = nx.Graph([(1,2),(1,3),(2,4),(3,4),(4,5)])
+        graph.add_edges_from([(5,6),(1,3)], key='g')
+        expOutput = list(nx.edges(graph))
+        result = [(1,2),(1,3),(2,4),(3,4),(4,5),(5,6)]
+        self.assertListEqual(expOutput, result)
+
 if __name__ == '__main__':
     unittest.main()
