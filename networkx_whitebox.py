@@ -25,6 +25,13 @@ class AddEdges(unittest.TestCase):
         expOutput = list(nx.edges(graph))
         result = [(1,2),(1,3),(2,4),(3,4),(4,5),(5,9)]
         self.assertEqual(set(expOutput), set(result))
+
+    def test_add_edges_from_single_edge_with_key_new_node_new_vertex(self):
+        graph = nx.Graph([(1,2),(1,3),(2,4),(3,4),(4,5)])
+        graph.add_edges_from([(6,7)], key=5)
+        expOutput = list(nx.edges(graph))
+        result = [(1,2),(1,3),(2,4),(3,4),(4,5),(6,7)]
+        self.assertEqual(set(expOutput), set(result))
   
   
   
